@@ -1,0 +1,100 @@
+/* === Basis === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0c0f1a;
+  color: #e0e6f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+main {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  border: 1px solid #1e2a3f;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(80, 168, 255, 0.1);
+}
+
+/* === Titels & Tekst === */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #4aa8ff;
+}
+
+p {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+code {
+  background: #1b2233;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #ffcc66;
+}
+
+/* === Inputs & Knoppen === */
+input[type="text"] {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #1a1f2e;
+  color: #ffffff;
+  outline: none;
+}
+
+button {
+  padding: 0.7rem 1.5rem;
+  background-color: #4aa8ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #1e90ff;
+}
+
+/* === Tabel === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+th, td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #2a354a;
+}
+
+th {
+  background-color: #101622;
+  color: #4aa8ff;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
