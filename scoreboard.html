@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoreboard – Lucas_CTF</title>
+  <script type="module" src="./js/firebase.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main>
+    <h1>🏆 Scoreboard – Lucas_CTF</h1>
+    <p>De snelste spelers staan bovenaan. Alleen kennis, geen tools!</p>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Naam</th>
+          <th>Tijd (s)</th>
+        </tr>
+      </thead>
+      <tbody id="scoreTable">
+        <tr><td colspan="3">Laden...</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script type="module">
+    import { getScores } from './js/firebase.js';
+
+    const table = document.getElementById("scoreTable");
+
+    getScores().then(scores => {
+      if (scores.length === 0) {
+        table.innerHTML = "<tr><td colspan='3'>Nog geen scores...</td></tr>";
+        return;
+      }
+
+      table.innerHTML = "";
+      scores.forEach((s, i) => {
+        const row = `<tr>
+          <td>${i + 1}</td>
+          <td>${s.name}</td>
+          <td>${s.time}s</td>
+        </tr>`;
+        table.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>
