@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /secret-flag/
+
+# Misschien zit daar iets verstopt? 😉
