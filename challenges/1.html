@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge 1 – Vind de verborgen code</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Challenge 1 – Inspect the Source</h1>
+    <p>Ergens op deze pagina zit een geheime flag verstopt. Zoek goed!</p>
+    <input type="text" id="answer" placeholder="Voer de flag in (bijv. flag{...})">
+    <button onclick="checkAnswer()">Check</button>
+    <p id="result"></p>
+  </main>
+
+  <!-- 👇 VERBORGEN IN DE BRON 👇 -->
+  <!-- flag{lucas_hidden} -->
+
+  <script>
+    function checkAnswer() {
+      const input = document.getElementById("answer").value.trim();
+      if (input === "flag{lucas_hidden}") {
+        localStorage.setItem("ctfCode1", "6");
+        document.getElementById("result").textContent = "✅ Correct! Code 1 is: 6";
+        setTimeout(() => {
+          window.location.href = "2.html";
+        }, 2000);
+      } else {
+        document.getElementById("result").textContent = "❌ Nope. Probeer opnieuw.";
+      }
+    }
+  </script>
+</body>
+</html>
