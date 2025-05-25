@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge 5 – De Finale</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Challenge 5 – De Finale</h1>
+    <p>
+      Tijd voor de laatste code. Als je deze oplost en je eerdere cijfers hebt bewaard, kun je straks de eindoplossing invoeren.
+    </p>
+
+    <p><strong>Vraag:</strong><br>
+    Ik ben een even getal.<br>
+    Als je me deelt door 2 krijg je 2.<br>
+    Wat ben ik?</p>
+
+    <input type="text" id="answer" placeholder="Code">
+    <button onclick="checkAnswer()">Check</button>
+    <p id="result"></p>
+  </main>
+
+  <script>
+    function checkAnswer() {
+      const input = document.getElementById("answer").value.trim();
+      if (input === "4") {
+        localStorage.setItem("ctfCode5", "4");
+        document.getElementById("result").textContent = "✅ Correct! Code 5 is: 4";
+        setTimeout(() => {
+          window.location.href = "../submit.html";
+        }, 2000);
+      } else {
+        document.getElementById("result").textContent = "❌ Nope. Denk goed na.";
+      }
+    }
+  </script>
+</body>
+</html>
