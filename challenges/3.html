@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge 3 – Hash Me If You Can</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Challenge 3 – Hash Me If You Can</h1>
+    <p>
+      Hashes worden vaak gebruikt om wachtwoorden of codes te beveiligen. Maar sommige hashes kun je nog steeds kraken door slimme gokjes of "rainbow tables".
+    </p>
+
+    <p><strong>Voorbeelden:</strong></p>
+    <ul>
+      <li><code>"code is 1"</code> → MD5: <code>22007e77a809f1fff1175d1e9ef57c84</code></li>
+      <li><code>"code is 2"</code> → MD5: <code>63489a19d73054664e64a8ba3181e064</code></li>
+    </ul>
+
+    <p>
+      Maar kun jij deze kraken?<br>
+      MD5: <code>254a71a26dfd04ac7c4372c14b58218f</code><br>
+      Gebruik <a href="https://www.md5hashgenerator.com/" target="_blank">deze MD5-generator</a> en probeer in max 10 pogingen.
+    </p>
+
+    <input type="text" id="answer" placeholder="Wat is de originele tekst?" disabled>
+    <button onclick="checkAnswer()" disabled id="checkBtn">Check</button>
+    <p id="result"></p>
+    <p id="tries">Pogingen over: <span id="left">10</span></p>
+  </main>
+
+  <script>
+    let tries = 10;
+    const input = document.getElementById("answer");
+    const btn = document.getElementById("checkBtn");
+
+    input.disabled = false;
+    btn.disabled = false;
+
+    function checkAnswer() {
+      const value = input.value.trim().toLowerCase();
+      const correct = "lucas_ctf";
+
+      if (value === correct) {
+        localStorage.setItem("ctfCode3", "2");
+        document.getElementById("result").textContent = "✅ Correct! Code 3 is: 2";
+        input.disabled = true;
+        btn.disabled = true;
+        setTimeout(() => {
+          window.location.href = "4.html";
+        }, 2000);
+      } else {
+        tries--;
+        document.getElementById("left").textContent = tries;
+        if (tries <= 0) {
+          input.disabled = true;
+          btn.disabled = true;
+          document.getElementById("result").textContent = "⏳ Je hebt alle pogingen gebruikt. Wacht 60 seconden...";
+
+          setTimeout(() => {
+            tries = 10;
+            input.disabled = false;
+            btn.disabled = false;
+            document.getElementById("left").textContent = tries;
+            document.getElementById("result").textContent = "Je mag het opnieuw proberen!";
+          }, 60000);
+        } else {
+          document.getElementById("result").textContent = "❌ Fout. Probeer opnieuw.";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
