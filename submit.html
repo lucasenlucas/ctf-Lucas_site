@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit – Eindcode invoeren</title>
+  <script type="module" src="./js/firebase.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Finale – Voer de eindcode in</h1>
+    <p>Heb je alle 5 cijfers verzameld? Vul dan de volledige code hieronder in om je score op te slaan.</p>
+
+    <input type="text" id="finalCode" placeholder="Bijv. 64214">
+    <button onclick="submitCode()">Indienen</button>
+    <p id="status"></p>
+  </main>
+
+  <script type="module">
+    import { saveScore } from './js/firebase.js';
+
+    function getCombinedCode() {
+      return (
+        localStorage.getItem("ctfCode1") +
+        localStorage.getItem("ctfCode2") +
+        localStorage.getItem("ctfCode3") +
+        localStorage.getItem("ctfCode4") +
+        localStorage.getItem("ctfCode5")
+      );
+    }
+
+    window.submitCode = async function () {
+      const entered = document.getElementById("finalCode").value.trim();
+      const expected = getCombinedCode(); // bv. '64214'
+
+      const name = localStorage.getItem("ctfPlayer");
+      const startTime = parseInt(localStorage.getItem("ctfStartTime"));
+      const endTime = Date.now();
+      const totalTime = ((endTime - startTime) / 1000).toFixed(2);
+
+      if (entered === expected) {
+        document.getElementById("status").textContent = `✅ Correct! Je tijd: ${totalTime}s`;
+
+        await saveScore(name || "Anoniem", Number(totalTime));
+
+        setTimeout(() => {
+          window.location.href = "scoreboard.html";
+        }, 2000);
+      } else {
+        document.getElementById("status").textContent = "❌ Foute code. Controleer je opdrachten nog eens.";
+      }
+    };
+  </script>
+</body>
+</html>
