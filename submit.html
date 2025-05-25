@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Submit – Eindcode invoeren</title>
-  <script type="module" src="./js/firebase.js"></script>
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -12,13 +11,14 @@
     <p>Heb je alle 5 codes verzameld? Vul dan de volledige eindcode hieronder in om je tijd te registreren.</p>
 
     <input type="text" id="finalCode" placeholder="Bijv. 64214">
-    <button onclick="submitCode()">Indienen</button>
+    <button id="submitBtn">Indienen</button>
     <p id="status"></p>
   </main>
 
   <script type="module">
     import { saveScore } from './js/firebase.js';
 
+    // Helper om de eindcode samen te stellen
     function getCombinedCode() {
       return (
         localStorage.getItem("ctfCode1") +
@@ -29,9 +29,10 @@
       );
     }
 
-    window.submitCode = async function () {
+    // Event listener koppelen aan de knop
+    document.getElementById("submitBtn").addEventListener("click", async function () {
       const entered = document.getElementById("finalCode").value.trim();
-      const expected = getCombinedCode(); // bv. '64214'
+      const expected = getCombinedCode(); // Verwachte eindcode: 64214
 
       const name = localStorage.getItem("ctfPlayer") || "Anoniem";
       const startTime = parseInt(localStorage.getItem("ctfStartTime"));
@@ -47,14 +48,13 @@
             window.location.href = "scoreboard.html";
           }, 2000);
         } catch (e) {
-          console.error("Fout bij opslaan score:", e);
-          document.getElementById("status").textContent = "⚠️ Kon score niet opslaan. Probeer opnieuw.";
+          console.error("Fout bij opslaan:", e);
+          document.getElementById("status").textContent = "⚠️ Kon score niet opslaan.";
         }
-
       } else {
-        document.getElementById("status").textContent = "❌ Foute code. Controleer je opdrachten nog eens.";
+        document.getElementById("status").textContent = "❌ Fout. Controleer je opdrachten nog eens.";
       }
-    };
+    });
   </script>
 </body>
 </html>
