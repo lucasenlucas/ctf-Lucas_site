@@ -8,8 +8,8 @@
 </head>
 <body>
   <main>
-    <h1>Finale – Voer de eindcode in</h1>
-    <p>Heb je alle 5 cijfers verzameld? Vul dan de volledige code hieronder in om je score op te slaan.</p>
+    <h1>🏁 Finale – Voer de eindcode in</h1>
+    <p>Heb je alle 5 codes verzameld? Vul dan de volledige eindcode hieronder in om je tijd te registreren.</p>
 
     <input type="text" id="finalCode" placeholder="Bijv. 64214">
     <button onclick="submitCode()">Indienen</button>
@@ -33,7 +33,7 @@
       const entered = document.getElementById("finalCode").value.trim();
       const expected = getCombinedCode(); // bv. '64214'
 
-      const name = localStorage.getItem("ctfPlayer");
+      const name = localStorage.getItem("ctfPlayer") || "Anoniem";
       const startTime = parseInt(localStorage.getItem("ctfStartTime"));
       const endTime = Date.now();
       const totalTime = ((endTime - startTime) / 1000).toFixed(2);
@@ -41,11 +41,16 @@
       if (entered === expected) {
         document.getElementById("status").textContent = `✅ Correct! Je tijd: ${totalTime}s`;
 
-        await saveScore(name || "Anoniem", Number(totalTime));
+        try {
+          await saveScore(name, Number(totalTime));
+          setTimeout(() => {
+            window.location.href = "scoreboard.html";
+          }, 2000);
+        } catch (e) {
+          console.error("Fout bij opslaan score:", e);
+          document.getElementById("status").textContent = "⚠️ Kon score niet opslaan. Probeer opnieuw.";
+        }
 
-        setTimeout(() => {
-          window.location.href = "scoreboard.html";
-        }, 2000);
       } else {
         document.getElementById("status").textContent = "❌ Foute code. Controleer je opdrachten nog eens.";
       }
