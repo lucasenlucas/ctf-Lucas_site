@@ -1,0 +1,28 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucas_CTF</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Lucas_CTF</h1>
+    <p>Voer je naam in om te beginnen. Gebruik geen tools! Alles is puur kennis 🔒</p>
+    <input type="text" id="playerName" placeholder="Jouw naam">
+    <button onclick="startCTF()">Start</button>
+  </main>
+
+  <script>
+    function startCTF() {
+      const name = document.getElementById("playerName").value;
+      if (!name) return alert("Vul je naam in!");
+      localStorage.setItem("ctfPlayer", name);
+      localStorage.setItem("ctfStartTime", Date.now());
+      window.location.href = "challenges/1.html";
+    }
+  </script>
+</body>
+</html>
