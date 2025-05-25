@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge 4 – Denk als een script</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Challenge 4 – Denk als een script</h1>
+    <p>
+      Soms is de oplossing geen brute kracht, maar logisch redeneren.<br>
+      Geef twee woorden in. De code verschijnt alleen als je het juiste paar raadt.
+    </p>
+
+    <input type="text" id="input1" placeholder="Eerste woord">
+    <input type="text" id="input2" placeholder="Tweede woord">
+    <button onclick="checkAnswer()">Check</button>
+    <p id="result"></p>
+  </main>
+
+  <script>
+    function geheimeCheck(a, b) {
+      return (
+        (a === "lucas" && b === "rocks") ||
+        (a === "no" && b === "tools") ||
+        (a === "js" && b === "logic")
+      );
+    }
+
+    function checkAnswer() {
+      const a = document.getElementById("input1").value.trim().toLowerCase();
+      const b = document.getElementById("input2").value.trim().toLowerCase();
+
+      if (geheimeCheck(a, b)) {
+        localStorage.setItem("ctfCode4", "1");
+        document.getElementById("result").textContent = "✅ Correct! Code 4 is: 1";
+        setTimeout(() => {
+          window.location.href = "5.html";
+        }, 2000);
+      } else {
+        document.getElementById("result").textContent = "❌ Nope. Dat is het niet.";
+      }
+    }
+  </script>
+</body>
+</html>
